@@ -1,11 +1,3 @@
-Permintaan Anda adalah membuat file atau halaman baru yang memungkinkan untuk mengedit halaman index pada repositori hugetbara/websitehuget. Mohon konfirmasi:
-- Apakah Anda ingin sebuah file editor sederhana (misal: edit-index.html) yang bisa mengedit index.html?
-- Atau Anda ingin menambahkan route/page di framework tertentu (misal: Next.js, React, dsb.)?
-- Apakah index yang dimaksud adalah index.html di root, atau file lain?
-
-Tanpa detail framework, saya asumsikan Anda ingin file HTML baru yang bisa mengedit index.html. Berikut contoh sederhana halaman editor untuk index.html menggunakan JavaScript dan fetch API (asumsi backend menerima PATCH/PUT ke /index.html):
-
-````html name=edit-index.html
 <!DOCTYPE html>
 <html lang="id">
 <head>
