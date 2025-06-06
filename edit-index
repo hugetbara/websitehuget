@@ -1,0 +1,52 @@
+Permintaan Anda adalah membuat file atau halaman baru yang memungkinkan untuk mengedit halaman index pada repositori hugetbara/websitehuget. Mohon konfirmasi:
+- Apakah Anda ingin sebuah file editor sederhana (misal: edit-index.html) yang bisa mengedit index.html?
+- Atau Anda ingin menambahkan route/page di framework tertentu (misal: Next.js, React, dsb.)?
+- Apakah index yang dimaksud adalah index.html di root, atau file lain?
+
+Tanpa detail framework, saya asumsikan Anda ingin file HTML baru yang bisa mengedit index.html. Berikut contoh sederhana halaman editor untuk index.html menggunakan JavaScript dan fetch API (asumsi backend menerima PATCH/PUT ke /index.html):
+
+````html name=edit-index.html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Edit Index</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2em; }
+    textarea { width: 100%; height: 400px; }
+    button { margin-top: 1em; padding: 0.5em 1.5em; }
+  </style>
+</head>
+<body>
+  <h1>Edit Halaman Index</h1>
+  <textarea id="editor"></textarea>
+  <br>
+  <button onclick="saveIndex()">Simpan Perubahan</button>
+  <p id="status"></p>
+  <script>
+    // Load index.html
+    fetch('/index.html')
+      .then(res => res.text())
+      .then(html => { document.getElementById('editor').value = html; });
+
+    function saveIndex() {
+      const content = document.getElementById('editor').value;
+      fetch('/index.html', {
+        method: 'PUT', // atau PATCH sesuai backend Anda
+        headers: { 'Content-Type': 'text/html' },
+        body: content
+      })
+      .then(res => {
+        if (res.ok) {
+          document.getElementById('status').textContent = 'Berhasil disimpan!';
+        } else {
+          document.getElementById('status').textContent = 'Gagal menyimpan.';
+        }
+      })
+      .catch(() => {
+        document.getElementById('status').textContent = 'Terjadi error saat menyimpan.';
+      });
+    }
+  </script>
+</body>
+</html>
